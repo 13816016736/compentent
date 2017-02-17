@@ -55,7 +55,7 @@ public class LogInternalFacade implements ILogInternalFacade{
 
             // 设置请求者的IP
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-            // logInfo.setRequestIp(CommonUtils.getRemoteHost(request));
+            logInfo.setRequestIp(CommonUtils.getRemoteHost(request));
             logInfo.setRequestUrl(request.getRequestURI());
 
             // 设置登入用户信息
@@ -165,7 +165,7 @@ public class LogInternalFacade implements ILogInternalFacade{
             for(int argsAsString = 0; argsAsString < argsLength; ++argsAsString) {
                 if(inParam[argsAsString] != null) {
                     String name = inParam[argsAsString].getClass().toString();
-                    if (!(name.contains("Servlet") || name.contains("ModelMap"))) {
+                    if (!(name.contains("Servlet") || name.contains("ModelMap") || name.contains("Request") || name.contains("Response"))) {
                         paramMap.put("param[" + argsAsString + "]", JSONUtils.toJson(inParam[argsAsString]));
                     }
 
